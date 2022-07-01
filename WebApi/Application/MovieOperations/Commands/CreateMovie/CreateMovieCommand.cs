@@ -19,10 +19,10 @@ public class CreateMovieCommand
 
     public void Handle()
     {
-        var movieInDb = context.Movies.SingleOrDefault(m=>m.Name == Model.Name);
+        var movieInDb = context.Movies.SingleOrDefault(m=>m.Name.ToLower() == Model.Name.ToLower());
 
         if(movieInDb is not null)
-            throw new InvalidOperationException("Bu film zaten mevcuttur");
+            throw new InvalidOperationException("Movie Name: " + Model.Name + "already exists.");
 
         var newMovie = mapper.Map<Movie>(Model);
 

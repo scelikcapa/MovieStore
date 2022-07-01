@@ -1,9 +1,17 @@
 using AutoMapper;
+using WebApi.Entities;
+using WebApi.Application.MovieOperations.Queries.GetMovies;
+using WebApi.Application.MovieOperations.Queries.GetMovieById;
 using WebApi.Application.MovieOperations.Commands.CreateMovie;
 using WebApi.Application.MovieOperations.Commands.UpdateMovie;
-using WebApi.Application.MovieOperations.Queries.GetMovieById;
-using WebApi.Application.MovieOperations.Queries.GetMovies;
-using WebApi.Entities;
+using WebApi.Application.CustomerOperations.Queries.GetCustomers;
+using WebApi.Application.CustomerOperations.Queries.GetCustomerById;
+using WebApi.Application.CustomerOperations.Commands.CreateCustomer;
+using WebApi.Application.CustomerOperations.Commands.UpdateCustomer;
+using WebApi.Application.ActorOperations.Queries.GetActors;
+using WebApi.Application.ActorOperations.Queries.GetActorById;
+using WebApi.Application.ActorOperations.Commands.CreateActor;
+using WebApi.Application.ActorOperations.Commands.UpdateActor;
 
 namespace WebApi.Common;
 
@@ -11,6 +19,7 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
+        // MovieOperations
         CreateMap<Movie, GetMoviesViewModel>().ForMember(dest=> dest.Year, opt=> opt.MapFrom(src=>src.Year.Year));
         CreateMap<Movie, GetMovieByIdViewModel>().ForMember(dest=> dest.Year, opt=> opt.MapFrom(src=>src.Year.Year));
         CreateMap<CreateMovieModel, Movie>().ForMember(dest=> dest.Year, opt=> opt.MapFrom(src=>new DateTime(src.Year,01,01)));
@@ -22,5 +31,20 @@ public class MappingProfile : Profile
             .ForMember(dest=> dest.GenreId, opt=> opt.Condition(src=>src.GenreId is not null))
             .ForMember(dest=> dest.DirectorId, opt=> opt.Condition(src=>src.DirectorId is not null))
             .ForMember(dest=> dest.IsActive, opt=> opt.Condition(src=>src.IsActive is not null));
+        
+        // CustomerOperations
+        CreateMap<Customer, GetCustomersViewModel>();
+        CreateMap<Customer, GetCustomerByIdViewModel>();
+        CreateMap<CreateCustomerModel, Customer>();
+         CreateMap<UpdateCustomerModel, Customer>()
+            .ForMember(dest=> dest.Id, opt=> opt.Ignore());
+
+        // ActorOperations
+        CreateMap<Actor, GetActorsViewModel>();
+        CreateMap<Actor, GetActorByIdViewModel>();
+        CreateMap<CreateActorModel, Actor>();
+         CreateMap<UpdateActorModel, Actor>()
+            .ForMember(dest=> dest.Id, opt=> opt.Ignore());
+        
     }
 }

@@ -47,10 +47,10 @@ public class MoviesController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult CreateMovie([FromBody] CreateMovieModel newBook)
+    public IActionResult CreateMovie([FromBody] CreateMovieModel newMovie)
     {
         var command = new CreateMovieCommand(context,mapper);
-        command.Model=newBook;
+        command.Model=newMovie;
 
         var validator = new CreateMovieCommandValidator();
         validator.ValidateAndThrow(command);
@@ -61,11 +61,11 @@ public class MoviesController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateMovie(int id, [FromBody] UpdateMovieModel updatedBook)
+    public IActionResult UpdateMovie(int id, [FromBody] UpdateMovieModel updatedMovie)
     {
         var command = new UpdateMovieCommand(context,mapper);
         command.MovieId = id;
-        command.Model=updatedBook;
+        command.Model=updatedMovie;
 
         var validator = new UpdateMovieCommandValidator();
         validator.ValidateAndThrow(command);

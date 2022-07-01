@@ -24,12 +24,12 @@ public class UpdateMovieCommand
         var movieInDb = context.Movies.SingleOrDefault(m=>m.Id == MovieId);
 
         if(movieInDb is null)
-            throw new InvalidOperationException("Id: "+MovieId+" olan bir film bulunamadı. Güncelleme başarısız");
+            throw new InvalidOperationException("MovieId: "+MovieId+" does not exist.");
         
-        bool isSameNameExists = context.Movies.Where(m=>m.Name == Model.Name && m.Id != MovieId).Any();
+        bool isSameNameExists = context.Movies.Where(m=>m.Name.ToLower() == Model.Name.ToLower() && m.Id != MovieId).Any();
         
         if(isSameNameExists)
-            throw new InvalidOperationException("Aynı isimli bir film zaten mevcuttur. Başka isim seçiniz");
+            throw new InvalidOperationException("MovieName: "+ Model.Name +" already exists, choose another name.");
 
         mapper.Map<UpdateMovieModel, Movie>(Model, movieInDb);
 

@@ -6,10 +6,10 @@ public class CreateMovieCommandValidator : AbstractValidator<CreateMovieCommand>
 {
     public CreateMovieCommandValidator()
     {
-        RuleFor(p=>p.Model.DirectorId).NotEmpty().GreaterThan(0);
-        RuleFor(p=>p.Model.GenreId).NotEmpty().GreaterThan(0);
-        RuleFor(p=>p.Model.Name).NotEmpty().MinimumLength(3);
-        RuleFor(p=>p.Model.Price).NotEmpty().GreaterThan(0);
-        RuleFor(p=>p.Model.Year).NotEmpty().LessThanOrEqualTo(DateTime.Now.Year);
+        RuleFor(cmd=>cmd.Model.DirectorId).NotEmpty().GreaterThan(0);
+        RuleFor(cmd=>cmd.Model.GenreId).NotEmpty().GreaterThan(0);
+        RuleFor(cmd=>cmd.Model.Name).NotEmpty().MinimumLength(3);
+        RuleFor(cmd=>cmd.Model.Price).NotEmpty().GreaterThan(0);
+        RuleFor(cmd=>cmd.Model.Year).NotEmpty().LessThanOrEqualTo(DateTime.Now.Year);
     }
 }

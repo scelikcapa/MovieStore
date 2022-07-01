@@ -22,7 +22,7 @@ public class DeleteMovieCommand
         var movieInDb = context.Movies.SingleOrDefault(m=>m.Id == MovieId);
 
         if(movieInDb is null)
-            throw new InvalidOperationException("Id: "+MovieId+" olan silinecek bir film bulunamadı.");
+            throw new InvalidOperationException("Movie Id: "+MovieId+" does not exists.");
         
         movieInDb.IsActive = false;
         

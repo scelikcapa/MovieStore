@@ -22,7 +22,7 @@ public class GetMovieByIdQuery
         var movie = context.Movies.SingleOrDefault(m => m.Id == MovieId && m.IsActive == true);
 
         if(movie is null)
-            throw new InvalidOperationException("Movie does not exist");
+            throw new InvalidOperationException("MovieId: "+MovieId+" does not exist");
 
         var movieViewModel = mapper.Map<GetMovieByIdViewModel>(movie);
 
