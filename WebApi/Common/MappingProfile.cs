@@ -12,6 +12,10 @@ using WebApi.Application.ActorOperations.Queries.GetActors;
 using WebApi.Application.ActorOperations.Queries.GetActorById;
 using WebApi.Application.ActorOperations.Commands.CreateActor;
 using WebApi.Application.ActorOperations.Commands.UpdateActor;
+using WebApi.Application.DirectorOperations.Queries.GetDirectors;
+using WebApi.Application.DirectorOperations.Queries.GetDirectorById;
+using WebApi.Application.DirectorOperations.Commands.CreateDirector;
+using WebApi.Application.DirectorOperations.Commands.UpdateDirector;
 
 namespace WebApi.Common;
 
@@ -44,6 +48,13 @@ public class MappingProfile : Profile
         CreateMap<Actor, GetActorByIdViewModel>();
         CreateMap<CreateActorModel, Actor>();
          CreateMap<UpdateActorModel, Actor>()
+            .ForMember(dest=> dest.Id, opt=> opt.Ignore());
+
+        // DirectorOperations
+        CreateMap<Director, GetDirectorsViewModel>();
+        CreateMap<Director, GetDirectorByIdViewModel>();
+        CreateMap<CreateDirectorModel, Director>();
+        CreateMap<UpdateDirectorModel, Director>()
             .ForMember(dest=> dest.Id, opt=> opt.Ignore());
         
     }
