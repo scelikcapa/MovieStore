@@ -16,6 +16,7 @@ using WebApi.Application.DirectorOperations.Queries.GetDirectors;
 using WebApi.Application.DirectorOperations.Queries.GetDirectorById;
 using WebApi.Application.DirectorOperations.Commands.CreateDirector;
 using WebApi.Application.DirectorOperations.Commands.UpdateDirector;
+using WebApi.Application.CustomerMoviesOperations.Queries.GetCustomerMovies;
 
 namespace WebApi.Common;
 
@@ -42,10 +43,11 @@ public class MappingProfile : Profile
         CreateMap<CreateCustomerModel, Customer>();
          CreateMap<UpdateCustomerModel, Customer>()
             .ForMember(dest=> dest.Id, opt=> opt.Ignore());
-
         // CustomerGenres
         CreateMap<Genre, GetCustomerGenresViewModel>();
-        
+        // CustomerMovies
+        CreateMap<Movie, GetCustomerMoviesViewModel>();
+
         // ActorOperations
         CreateMap<Actor, GetActorsViewModel>();
         CreateMap<Actor, GetActorByIdViewModel>();

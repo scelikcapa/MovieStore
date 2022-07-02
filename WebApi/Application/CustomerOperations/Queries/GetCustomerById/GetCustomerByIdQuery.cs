@@ -22,7 +22,7 @@ public class GetCustomerByIdQuery
         var customer = context.Customers.SingleOrDefault(m => m.Id == CustomerId);
 
         if(customer is null)
-            throw new InvalidOperationException("CustomerId: "+CustomerId+" does not exist");
+            throw new InvalidOperationException("CustomerId: "+CustomerId+" does not exist.");
 
         var customerViewModel = mapper.Map<GetCustomerByIdViewModel>(customer);
 
