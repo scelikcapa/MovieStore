@@ -43,6 +43,9 @@ public class MappingProfile : Profile
          CreateMap<UpdateCustomerModel, Customer>()
             .ForMember(dest=> dest.Id, opt=> opt.Ignore());
 
+        // CustomerGenres
+        CreateMap<Genre, GetCustomerGenresViewModel>();
+        
         // ActorOperations
         CreateMap<Actor, GetActorsViewModel>();
         CreateMap<Actor, GetActorByIdViewModel>();
@@ -56,6 +59,7 @@ public class MappingProfile : Profile
         CreateMap<CreateDirectorModel, Director>();
         CreateMap<UpdateDirectorModel, Director>()
             .ForMember(dest=> dest.Id, opt=> opt.Ignore());
+        
         
     }
 }

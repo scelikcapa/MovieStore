@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Application.CustomerOperations.Commands.AddCustomerGenre;
 using WebApi.Application.CustomerOperations.Commands.CreateCustomer;
 using WebApi.Application.CustomerOperations.Commands.DeleteCustomer;
 using WebApi.Application.CustomerOperations.Commands.UpdateCustomer;
@@ -27,9 +28,9 @@ public class CustomersController : ControllerBase
     public IActionResult GetCustomers()
     {
         var query = new GetCustomersQuery(context,mapper);
-        var movies = query.Handle();
+        var customers = query.Handle();
 
-        return Ok(movies);
+        return Ok(customers);
     }
 
     [HttpGet("{id}")]
@@ -41,9 +42,9 @@ public class CustomersController : ControllerBase
         var validator = new GetCustomerByIdQueryValidator();
         validator.ValidateAndThrow(query);
 
-        var movie = query.Handle();
+        var customer = query.Handle();
 
-        return Ok(movie);
+        return Ok(customer);
     }
 
     [HttpPost]
@@ -84,6 +85,35 @@ public class CustomersController : ControllerBase
         var validator = new DeleteCustomerCommandValidator();
         validator.ValidateAndThrow(command);
 
+        command.Handle();
+
+        return Ok();
+    }
+
+    [HttpGet("{id}/Genres")]
+    public IActionResult GetCustomerGenres(int id)
+    {
+        var query = new GetCustomerGenresQuery(context,mapper);
+        query.CustomerId = id;
+        
+        var validator = new GetCustomerGenresQueryValidator();
+        validator.ValidateAndThrow(query);
+        
+        var customerGenres = query.Handle();
+
+        return Ok(customerGenres);
+    }
+
+    [HttpPost("{id}/Genres")]
+    public IActionResult AddCustomerGenre(int id, [FromBody] AddCustomerGenreModel newGenre)
+    {
+        var command = new AddCustomerGenreCommand(context,mapper);
+        command.CustomerId = id;
+        command.Model = newGenre;
+        
+        var validator = new AddCustomerGenreCommandValidator();
+        validator.ValidateAndThrow(command);
+        
         command.Handle();
 
         return Ok();
