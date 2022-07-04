@@ -9,8 +9,9 @@ public class Customer
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public ICollection<Movie> Movies { get; set; }
-        public List<CustomerMovie> CustomerMovies { get; set; }
-        
+        // Use FluentApi for direct relation. Without FluentApi this will be null
+        // public ICollection<Movie> Movies { get; set; }
+
         public ICollection<Genre> Genres { get; set; }
+        public List<CustomerMovie> CustomerMovies { get; set; }
 }

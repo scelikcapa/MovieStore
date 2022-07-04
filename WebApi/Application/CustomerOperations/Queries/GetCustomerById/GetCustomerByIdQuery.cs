@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Application.CustomerMoviesOperations.Queries.GetCustomerMoviesById;
 using WebApi.DbOperations;
 using WebApi.Entities;
 
@@ -19,7 +20,7 @@ public class GetCustomerByIdQuery
 
     public GetCustomerByIdViewModel Handle()
     {
-        var customer = context.Customers.SingleOrDefault(m => m.Id == CustomerId);
+        var customer = context.Customers.Include(c=> c.CustomerMovies).SingleOrDefault(m => m.Id == CustomerId);
 
         if(customer is null)
             throw new InvalidOperationException("CustomerId: "+CustomerId+" does not exist.");
@@ -35,7 +36,5 @@ public class GetCustomerByIdViewModel
     public int Id { get; set; }
     public string Name { get; set; }
     public string Surname { get; set; }
-
-    public ICollection<Movie> Movies { get; set; }
-    public ICollection<Genre> Genres { get; set; }
+    public List<GetCustomerMoviesByIdViewModel> CustomerMovies { get; set; }
 }

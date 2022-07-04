@@ -19,7 +19,7 @@ public class GetMovieByIdQuery
 
     public GetMovieByIdViewModel Handle()
     {
-        var movie = context.Movies.SingleOrDefault(m => m.Id == MovieId && m.IsActive == true);
+        var movie = context.Movies.Include(m=> m.CustomerMovies).SingleOrDefault(m => m.Id == MovieId && m.IsActive == true);
 
         if(movie is null)
             throw new InvalidOperationException("MovieId: "+MovieId+" does not exist");
@@ -35,11 +35,11 @@ public class GetMovieByIdViewModel
     public int Id { get; set; }
     public string Name { get; set; }
     public int Year { get; set; }
-    public decimal Price { get; set; }
+    public double Price { get; set; }
 
     public int GenreId { get; set; }
     public int DirectorId { get; set; }
 
     // public ICollection<Actor> Actors { get; set; }
-    // public ICollection<Customer> Customers { get; set; }
+    public List<CustomerMovie> CustomerMovies { get; set; }
 }

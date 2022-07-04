@@ -1,7 +1,8 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Application.CustomerMoviesOperations.Queries.GetCustomerMovies;
+using WebApi.Application.CustomerMoviesOperations.Commands.CreateCustomerMovies;
+using WebApi.Application.CustomerMoviesOperations.Queries.GetCustomerMoviesById;
 using WebApi.DbOperations;
 
 namespace WebApi.Controllers;
@@ -20,16 +21,32 @@ public class CustomerMoviesController : ControllerBase
     }
 
     [HttpGet("{id}/Movies")]
-    public IActionResult GetCustomerMovies(int id)
+    public IActionResult GetCustomerMoviesById(int id)
     {
-        var query = new GetCustomerMoviesQuery(context,mapper);
+        var query = new GetCustomerMoviesByIdQuery(context,mapper);
         query.CustomerId = id;
 
-        var validator = new GetCustomerMoviesQueryValidator();
+        var validator = new GetCustomerMoviesByIdQueryValidator();
         validator.ValidateAndThrow(query);
 
         var customerMovies = query.Handle();
 
         return Ok(customerMovies);
+    }
+
+    [HttpPost]
+    [Route("{id}/Movies")]
+    public IActionResult CreateCustomerMovies(int id, [FromBody] CreateCustomerMoviesModel purchasedMovie)
+    {
+        var commmand = new CreateCustomerMoviesCommand(context,mapper);
+        commmand.CustomerId = id;
+        commmand.Model = purchasedMovie;
+
+        var validator = new CreateCustomerMoviesCommandValidator();
+        validator.ValidateAndThrow(commmand);
+
+        commmand.Handle();
+
+        return Ok();
     }
 }

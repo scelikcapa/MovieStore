@@ -18,7 +18,7 @@ public class GetCustomersQuery
 
     public List<GetCustomersViewModel> Handle()
     {
-        var customers = context.Customers.OrderBy(m=>m.Id).ToList();
+        var customers = context.Customers.Include(c=> c.CustomerMovies).OrderBy(m=>m.Id).ToList();
 
         var customersViewModel = mapper.Map<List<GetCustomersViewModel>>(customers);
 
@@ -31,7 +31,6 @@ public class GetCustomersViewModel
     public int Id { get; set; }
     public string Name { get; set; }
     public string Surname { get; set; }
+    public List<CustomerMovie> CustomerMovies { get; set; }
 
-    public ICollection<Movie> Movies { get; set; }
-    public ICollection<Genre> Genres { get; set; }
 }

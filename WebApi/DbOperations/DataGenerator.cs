@@ -78,8 +78,8 @@ public class DataGenerator
                     Price = 10,
                     GenreId = 2,
                     DirectorId = 1,
-                    Actors = context.Actors.Where(a=>a.Id == 1 || a.Id == 2).ToList(),
-                    Customers = context.Customers.Where(a=>a.Id==1).ToList()
+                    Actors = context.Actors.Where(a=>a.Id == 1 || a.Id == 2).ToList()
+                    // Customers = context.Customers.Where(a=>a.Id==1).ToList()
                 },
                 new Movie{
                     Name = "Green Mile",
@@ -87,10 +87,47 @@ public class DataGenerator
                     Price = 20,
                     GenreId = 1,
                     DirectorId = 2,
-                    Actors = context.Actors.Where(a=>a.Id == 3 || a.Id == 4).ToList(),
-                    Customers = context.Customers.Where(a=>a.Id==1 || a.Id==2).ToList()
+                    Actors = context.Actors.Where(a=>a.Id == 3 || a.Id == 4).ToList()
+                    // Customers = context.Customers.Where(a=>a.Id==1 || a.Id==2).ToList()
                 }
             );
+
+            context.CustomerMovies.AddRange(
+                new CustomerMovie{
+                    
+                    CustomerId = 1,
+                    MovieId = 1,
+                    Price = 10,
+                    OrderDate = DateTime.Now
+                },
+                new CustomerMovie{
+                    CustomerId = 1,
+                    MovieId = 2,
+                    Price = 20,
+                    OrderDate = DateTime.Now
+                },
+                new CustomerMovie{
+                    CustomerId = 2,
+                    MovieId = 2,
+                    Price = 20,
+                    OrderDate = DateTime.Now
+                }
+            );
+
+            // context.CustomerMovies.AddRange(
+            //     new CustomerMovie{
+            //         Price = 10,
+            //         OrderDate = DateTime.Now,
+            //         Customer = context.Customers.Single(c=>c.Id == 1),
+            //         Movie = context.Movies.Single(c=>c.Id == 1)                      
+            //     },
+            //     new CustomerMovie{
+            //         Price = 20,
+            //         OrderDate = DateTime.Now,
+            //         Customer = context.Customers.Single(c=>c.Id == 2),
+            //         Movie = context.Movies.Single(c=>c.Id == 2)   
+            //     }
+            // );
 
             context.SaveChanges();
             

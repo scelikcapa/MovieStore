@@ -18,7 +18,7 @@ public class GetMoviesQuery
 
     public List<GetMoviesViewModel> Handle()
     {
-        var movies = context.Movies.Where(m => m.IsActive == true).OrderBy(m=>m.Id).ToList();
+        var movies = context.Movies.Include(m=> m.CustomerMovies).Where(m => m.IsActive == true).OrderBy(m=>m.Id).ToList();
 
         var moviesViewModel = mapper.Map<List<GetMoviesViewModel>>(movies);
 
@@ -31,11 +31,11 @@ public class GetMoviesViewModel
     public int Id { get; set; }
     public string Name { get; set; }
     public int Year { get; set; }
-    public decimal Price { get; set; }
+    public double Price { get; set; }
 
     public int GenreId { get; set; }    
     public int DirectorId { get; set; }
 
     // public ICollection<Actor> Actors { get; set; }
-    // public ICollection<Customer> Customers { get; set; }
+     public List<CustomerMovie> CustomerMovies { get; set; }
 }
