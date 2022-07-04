@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using WebApi.DbOperations;
 using WebApi.Entities;
 
@@ -19,11 +20,14 @@ public class DeleteDirectorCommand
 
     public void Handle()
     {
-        var directorInDb = context.Directors.SingleOrDefault(m=>m.Id == DirectorId);
+        var directorInDb = context.Directors.Include(d=> d.Movies).SingleOrDefault(m=>m.Id == DirectorId);
 
         if(directorInDb is null)
             throw new InvalidOperationException("DirectorId: "+DirectorId+" does not exists.");
         
+        if(directorInDb.Movies.Any())
+            throw new InvalidOperationException("DirectorId: " + DirectorId + " has " +directorInDb.Movies.Count()+ " movies. Please delete them first.");
+            
         context.Directors.Remove(directorInDb);
         
         context.SaveChanges();
