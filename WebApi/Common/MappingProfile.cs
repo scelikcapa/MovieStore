@@ -48,7 +48,7 @@ public class MappingProfile : Profile
         CreateMap<Genre, GetCustomerGenresViewModel>();
         // CustomerMovies
         CreateMap<CustomerMovie, GetCustomerMoviesByIdViewModel>()
-            .ForMember(dest=> dest.OrderDate, opt=> opt.MapFrom(src=> src.OrderDate.ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture)));
+            .ForMember(dest=> dest.OrderDate, opt=> opt.MapFrom(src=> src.OrderDate.ToString("yyyy-MM-dd hh:mm:ss")));
 
         // ActorOperations
         CreateMap<Actor, GetActorsViewModel>();
