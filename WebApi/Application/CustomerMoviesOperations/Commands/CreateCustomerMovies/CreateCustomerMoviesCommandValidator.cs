@@ -7,6 +7,6 @@ public class CreateCustomerMoviesCommandValidator : AbstractValidator<CreateCust
     public CreateCustomerMoviesCommandValidator()
     {
         RuleFor(q=>q.CustomerId).GreaterThan(0);
-        RuleFor(q=>q.Model.MovieId).GreaterThan(0);
+        RuleFor(q=>q.Model.MovieId).NotEmpty().GreaterThan(0);
     }
 }
