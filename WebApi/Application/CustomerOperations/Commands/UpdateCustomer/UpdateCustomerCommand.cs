@@ -26,7 +26,10 @@ public class UpdateCustomerCommand
         if(customerInDb is null)
             throw new InvalidOperationException("CustomerId: "+CustomerId+" does not exist.");
         
-        bool isSameNameExists = context.Customers.Where(m=>m.Name.ToLower() == Model.Name.ToLower()&& m.Surname.ToLower() == Model.Surname.ToLower() && m.Id != CustomerId).Any();
+        bool isSameNameExists = context.Customers.Where(m =>
+                                                    m.Name.ToLower() == (Model.Name.ToLower() ?? customerInDb.Name.ToLower()) && 
+                                                    m.Surname.ToLower() == (Model.Surname.ToLower() ?? customerInDb.Surname.ToLower()) && 
+                                                    m.Id != CustomerId).Any();
         
         if(isSameNameExists)
             throw new InvalidOperationException("CustomerNameSurname: "+ Model.Name +" "+Model.Surname+" already exists, choose another name.");

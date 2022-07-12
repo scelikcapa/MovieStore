@@ -20,7 +20,7 @@ public class AddCustomerGenreCommand
 
     public void Handle()
     {
-        var customer = context.Customers.Include(c => c.Genres).SingleOrDefault(c=>c.Id == CustomerId);
+        var customer = context.Customers.Include(c => c.Genres).SingleOrDefault(c=>c.Id == CustomerId && c.IsActive == true);
 
         if(customer is null)
             throw new InvalidOperationException("CustomerId: " + CustomerId + " does not exist.");

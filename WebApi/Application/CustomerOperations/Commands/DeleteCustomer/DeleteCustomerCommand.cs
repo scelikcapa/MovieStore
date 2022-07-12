@@ -7,14 +7,12 @@ namespace WebApi.Application.CustomerOperations.Commands.DeleteCustomer;
 public class DeleteCustomerCommand 
 {
     private readonly IMovieStoreDbContext context;
-    private readonly IMapper mapper;
     public int CustomerId { get; set; }
     
 
-    public DeleteCustomerCommand(IMovieStoreDbContext context, IMapper mapper)
+    public DeleteCustomerCommand(IMovieStoreDbContext context)
     {
         this.context = context;
-        this.mapper = mapper;
     }
 
     public void Handle()
@@ -24,7 +22,7 @@ public class DeleteCustomerCommand
         if(customerInDb is null)
             throw new InvalidOperationException("CustomerId: "+CustomerId+" does not exists.");
         
-        context.Customers.Remove(customerInDb);
+        customerInDb.IsActive = false;
         
         context.SaveChanges();
     }

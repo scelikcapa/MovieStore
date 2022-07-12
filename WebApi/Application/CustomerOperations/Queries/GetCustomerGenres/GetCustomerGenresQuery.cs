@@ -19,7 +19,7 @@ public class GetCustomerGenresQuery
 
     public List<GetCustomerGenresViewModel> Handle()
     {
-        var customer = context.Customers.Include(c=> c.Genres).SingleOrDefault(m => m.Id == CustomerId);
+        var customer = context.Customers.Include(c=> c.Genres).SingleOrDefault(m => m.Id == CustomerId && m.IsActive == true);
 
         if(customer is null)
             throw new InvalidOperationException("CustomerId: "+CustomerId+" does not exist");

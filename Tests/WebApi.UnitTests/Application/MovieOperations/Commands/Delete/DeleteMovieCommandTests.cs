@@ -49,7 +49,7 @@ public class DeleteMovieCommandTests : IClassFixture<CommonTestFixture>
         FluentActions.Invoking(() => command.Handle()).Invoke();
 
         // Assert
-        var movie = context.Movies.SingleOrDefault(b=> b.Id == command.MovieId);
+        var movie = context.Movies.Single(b=> b.Id == command.MovieId);
         movie.IsActive.Should().BeFalse();
     }
 }

@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-<!--<Nullable>enable</Nullable>-->
+
+    <!--MY CODE-->
+    <Nullable>disable</Nullable>
+    
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 

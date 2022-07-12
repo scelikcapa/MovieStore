@@ -18,7 +18,7 @@ public class GetCustomersQuery
 
     public List<GetCustomersViewModel> Handle()
     {
-        var customers = context.Customers.Include(c=> c.CustomerMovies).OrderBy(m=>m.Id).ToList();
+        var customers = context.Customers.Include(c=> c.CustomerMovies).Where(c => c.IsActive == true).OrderBy(m=>m.Id).ToList();
 
         var customersViewModel = mapper.Map<List<GetCustomersViewModel>>(customers);
 

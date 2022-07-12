@@ -50,6 +50,7 @@ public class GetCustomerMoviesByIdQueryTests : IClassFixture<CommonTestFixture>
                 .Should().Throw<InvalidOperationException>().And.Message.Should().Be("CustomerId: " + command.CustomerId + " does not have any movie.");
     }
 
+    [Fact]
     public void WhenGivenCustomerHasMovie_CustomerMovies_ShouldBeReturned()
     {
         // arrange
@@ -68,9 +69,12 @@ public class GetCustomerMoviesByIdQueryTests : IClassFixture<CommonTestFixture>
         context.Customers.Add(customerInDb);
         context.SaveChanges();
 
-        var customerMoviesInDb = new CustomerMovie{
+        var customerMovieInDb = new CustomerMovie{
                                     CustomerId = customerInDb.Id,
                                     MovieId = movieInDb.Id};
+        
+        context.CustomerMovies.Add(customerMovieInDb);
+        context.SaveChanges();
 
         var command = new GetCustomerMoviesByIdQuery(context, mapper);
         command.CustomerId = customerInDb.Id;
@@ -80,6 +84,9 @@ public class GetCustomerMoviesByIdQueryTests : IClassFixture<CommonTestFixture>
 
         // assert
         customerMovies.Should().NotBeNull().And.HaveCount(1);
-        customerMovies[0].Should().Be(customerMoviesInDb);
+        customerMovies[0].Id.Should().Be(customerMovieInDb.Id);
+        customerMovies[0].Price.Should().Be(customerMovieInDb.Price);
+        customerMovies[0].OrderDate.Should().Be(customerMovieInDb.OrderDate.ToString("yyyy-MM-dd hh:mm:ss"));
+        customerMovies[0].MovieId.Should().Be(customerMovieInDb.MovieId);
     }
 }

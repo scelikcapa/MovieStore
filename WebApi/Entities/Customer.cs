@@ -14,4 +14,5 @@ public class Customer
 
         public ICollection<Genre> Genres { get; set; }
         public List<CustomerMovie> CustomerMovies { get; set; }
+        public bool IsActive { get; set; } = true;
 }

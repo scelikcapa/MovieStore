@@ -10,11 +10,8 @@ public class CreateMovieCommandValidatorTests : IClassFixture<CommonTestFixture>
     [InlineData(null, 10, 1, 1)]
     [InlineData("", 10, 1, 1)]
     [InlineData("Ti", 10, 1, 1)]
-    [InlineData("Title", null, 1, 1)]
     [InlineData("Title", 0, 1, 1)]
-    [InlineData("Title", 1, null, 1)]
     [InlineData("Title", 1, 0, 1)]
-    [InlineData("Title", 1, 1, null)]
     [InlineData("Title", 1, 1, 0)]
     public void WhenInvalidInputsAreGiven_Validator_ShouldBeReturnErrors(string title, double price, int genreId, int directorId)
     {

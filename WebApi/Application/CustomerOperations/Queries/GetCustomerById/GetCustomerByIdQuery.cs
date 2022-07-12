@@ -20,7 +20,7 @@ public class GetCustomerByIdQuery
 
     public GetCustomerByIdViewModel Handle()
     {
-        var customer = context.Customers.Include(c=> c.CustomerMovies).SingleOrDefault(m => m.Id == CustomerId);
+        var customer = context.Customers.Include(c=> c.CustomerMovies).SingleOrDefault(c => c.Id == CustomerId && c.IsActive == true);
 
         if(customer is null)
             throw new InvalidOperationException("CustomerId: "+CustomerId+" does not exist.");

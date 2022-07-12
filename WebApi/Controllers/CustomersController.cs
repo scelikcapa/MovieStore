@@ -79,7 +79,7 @@ public class CustomersController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteCustomer(int id)
     {
-        var command = new DeleteCustomerCommand(context,mapper);
+        var command = new DeleteCustomerCommand(context);
         command.CustomerId = id;
 
         var validator = new DeleteCustomerCommandValidator();
