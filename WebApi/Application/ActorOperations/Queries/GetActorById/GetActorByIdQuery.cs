@@ -22,7 +22,7 @@ public class GetActorByIdQuery
         var actor = context.Actors.Include(a=> a.Movies).SingleOrDefault(m => m.Id == ActorId);
 
         if(actor is null)
-            throw new InvalidOperationException("ActorId: "+ActorId+" does not exist");
+            throw new InvalidOperationException("ActorId: "+ActorId+" does not exist.");
 
         var actorViewModel = mapper.Map<GetActorByIdViewModel>(actor);
 

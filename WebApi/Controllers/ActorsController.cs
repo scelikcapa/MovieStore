@@ -78,7 +78,7 @@ public class ActorsController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteActor(int id)
     {
-        var command = new DeleteActorCommand(context,mapper);
+        var command = new DeleteActorCommand(context);
         command.ActorId = id;
 
         var validator = new DeleteActorCommandValidator();

@@ -29,7 +29,7 @@ public class GetMoviesQuery
 public class GetMoviesViewModel
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Title { get; set; }
     public int Year { get; set; }
     public double Price { get; set; }
 

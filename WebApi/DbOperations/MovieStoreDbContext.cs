@@ -43,10 +43,6 @@ public class MovieStoreDbContext : DbContext, IMovieStoreDbContext
         //             j.HasKey(pt=> pt.Id);
         //             j.Property(pt => pt.OrderDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
         //         });
-         
-         
-         
-         
-        
     }
+
 }

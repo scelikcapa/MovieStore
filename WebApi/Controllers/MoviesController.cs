@@ -78,7 +78,7 @@ public class MoviesController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteMovie(int id)
     {
-        var command = new DeleteMovieCommand(context,mapper);
+        var command = new DeleteMovieCommand(context);
         command.MovieId = id;
 
         var validator = new DeleteMovieCommandValidator();

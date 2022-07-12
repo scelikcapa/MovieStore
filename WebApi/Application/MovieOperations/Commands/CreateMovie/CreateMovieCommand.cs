@@ -19,10 +19,10 @@ public class CreateMovieCommand
 
     public void Handle()
     {
-        var movieInDb = context.Movies.SingleOrDefault(m=>m.Name.ToLower() == Model.Name.ToLower());
+        var movieInDb = context.Movies.SingleOrDefault(m=>m.Title.ToLower() == Model.Title.ToLower());
 
         if(movieInDb is not null)
-            throw new InvalidOperationException("Movie Name: " + Model.Name + "already exists.");
+            throw new InvalidOperationException("MovieTitle: " + Model.Title + " already exists, choose another name.");
 
         var newMovie = mapper.Map<Movie>(Model);
 
@@ -33,7 +33,7 @@ public class CreateMovieCommand
 
 public class CreateMovieModel 
 {
-    public string Name { get; set; }
+    public string Title { get; set; }
     public int Year { get; set; }
     public double Price { get; set; }
 

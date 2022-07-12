@@ -1,20 +1,16 @@
-using AutoMapper;
 using WebApi.DbOperations;
-using WebApi.Entities;
 
 namespace WebApi.Application.MovieOperations.Commands.DeleteMovie;
 
 public class DeleteMovieCommand 
 {
     private readonly IMovieStoreDbContext context;
-    private readonly IMapper mapper;
     public int MovieId { get; set; }
     
 
-    public DeleteMovieCommand(IMovieStoreDbContext context, IMapper mapper)
+    public DeleteMovieCommand(IMovieStoreDbContext context)
     {
         this.context = context;
-        this.mapper = mapper;
     }
 
     public void Handle()

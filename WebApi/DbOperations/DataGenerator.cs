@@ -73,7 +73,7 @@ public class DataGenerator
 
             context.Movies.AddRange(
                 new Movie{
-                    Name = "Matrix",
+                    Title = "Matrix",
                     Year = new DateTime(2000,01,01),
                     Price = 10,
                     GenreId = 2,
@@ -82,7 +82,7 @@ public class DataGenerator
                     // Customers = context.Customers.Where(a=>a.Id==1).ToList()
                 },
                 new Movie{
-                    Name = "Green Mile",
+                    Title = "Green Mile",
                     Year = new DateTime(2005,01,01),
                     Price = 20,
                     GenreId = 1,
@@ -113,22 +113,7 @@ public class DataGenerator
                     OrderDate = DateTime.Now
                 }
             );
-
-            // context.CustomerMovies.AddRange(
-            //     new CustomerMovie{
-            //         Price = 10,
-            //         OrderDate = DateTime.Now,
-            //         Customer = context.Customers.Single(c=>c.Id == 1),
-            //         Movie = context.Movies.Single(c=>c.Id == 1)                      
-            //     },
-            //     new CustomerMovie{
-            //         Price = 20,
-            //         OrderDate = DateTime.Now,
-            //         Customer = context.Customers.Single(c=>c.Id == 2),
-            //         Movie = context.Movies.Single(c=>c.Id == 2)   
-            //     }
-            // );
-
+            
             context.SaveChanges();
             
         }

@@ -26,10 +26,13 @@ public class UpdateMovieCommand
         if(movieInDb is null)
             throw new InvalidOperationException("MovieId: "+MovieId+" does not exist.");
         
-        bool isSameNameExists = context.Movies.Where(m=>m.Name.ToLower() == Model.Name.ToLower() && m.Id != MovieId).Any();
+        bool isSameTitleExists = context.Movies.Where(m=>
+                                                    m.Title.ToLower() == (Model.Title != null ? Model.Title.ToLower() : movieInDb.Title.ToLower()) && 
+                                                    m.Id != MovieId)
+                                                .Any();
         
-        if(isSameNameExists)
-            throw new InvalidOperationException("MovieName: "+ Model.Name +" already exists, choose another name.");
+        if(isSameTitleExists)
+            throw new InvalidOperationException("MovieTitle: "+ Model.Title +" already exists, choose another name.");
 
         mapper.Map<UpdateMovieModel, Movie>(Model, movieInDb);
 
@@ -39,7 +42,7 @@ public class UpdateMovieCommand
 
 public class UpdateMovieModel 
 {
-    public string? Name { get; set; }
+    public string? Title { get; set; }
     public int? Year { get; set; }
     public double? Price { get; set; }
 

@@ -26,7 +26,11 @@ public class UpdateDirectorCommand
         if(directorInDb is null)
             throw new InvalidOperationException("DirectorId: "+DirectorId+" does not exist.");
         
-        bool isSameNameExists = context.Directors.Where(m=>m.Name.ToLower() == Model.Name.ToLower() && m.Surname.ToLower() == Model.Surname.ToLower() && m.Id != DirectorId).Any();
+        bool isSameNameExists = context.Directors.Where(m=>
+                                                    m.Name.ToLower() == (Model.Name == null ? directorInDb.Name.ToLower() : Model.Name.ToLower()) && 
+                                                    m.Surname.ToLower() == (Model.Surname == null ? directorInDb.Surname.ToLower() : Model.Surname.ToLower()) && 
+                                                    m.Id != DirectorId)
+                                                 .Any();
         
         if(isSameNameExists)
             throw new InvalidOperationException("DirectorNameSurname: "+ Model.Name+" "+Model.Surname+" already exists, choose another name.");

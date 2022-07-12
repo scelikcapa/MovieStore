@@ -22,7 +22,7 @@ public class GetDirectorByIdQuery
         var director = context.Directors.SingleOrDefault(m => m.Id == DirectorId);
 
         if(director is null)
-            throw new InvalidOperationException("DirectorId: "+DirectorId+" does not exist");
+            throw new InvalidOperationException("DirectorId: "+DirectorId+" does not exist.");
 
         var directorViewModel = mapper.Map<GetDirectorByIdViewModel>(director);
 

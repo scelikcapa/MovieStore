@@ -78,7 +78,7 @@ public class DirectorsController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteDirector(int id)
     {
-        var command = new DeleteDirectorCommand(context,mapper);
+        var command = new DeleteDirectorCommand(context);
         command.DirectorId = id;
 
         var validator = new DeleteDirectorCommandValidator();

@@ -31,8 +31,9 @@ public class MappingProfile : Profile
         CreateMap<CreateMovieModel, Movie>().ForMember(dest=> dest.Year, opt=> opt.MapFrom(src=>new DateTime(src.Year,01,01)));
         CreateMap<UpdateMovieModel, Movie>()
             .ForMember(dest=> dest.Id, opt=> opt.Ignore())
-            .ForMember(dest=> dest.Name, opt=> opt.Condition(src=>src.Name is not null))
+            .ForMember(dest=> dest.Title, opt=> opt.Condition(src=>src.Title is not null))
             .ForMember(dest=> dest.Year, opt=> opt.Condition(src=>src.Year is not null))
+            .ForMember(dest=> dest.Year, opt=> opt.MapFrom(src=>new DateTime(src.Year.Value,01,01)))
             .ForMember(dest=> dest.Price, opt=> opt.Condition(src=>src.Price is not null))
             .ForMember(dest=> dest.GenreId, opt=> opt.Condition(src=>src.GenreId is not null))
             .ForMember(dest=> dest.DirectorId, opt=> opt.Condition(src=>src.DirectorId is not null))
@@ -55,14 +56,18 @@ public class MappingProfile : Profile
         CreateMap<Actor, GetActorByIdViewModel>();
         CreateMap<CreateActorModel, Actor>();
          CreateMap<UpdateActorModel, Actor>()
-            .ForMember(dest=> dest.Id, opt=> opt.Ignore());
+            .ForMember(dest=> dest.Id, opt=> opt.Ignore())
+            .ForMember(dest=> dest.Name, opt=> opt.Condition(src=> src.Name is not null))
+            .ForMember(dest=> dest.Surname, opt=> opt.Condition(src=> src.Surname is not null));
 
         // DirectorOperations
         CreateMap<Director, GetDirectorsViewModel>();
         CreateMap<Director, GetDirectorByIdViewModel>();
         CreateMap<CreateDirectorModel, Director>();
         CreateMap<UpdateDirectorModel, Director>()
-            .ForMember(dest=> dest.Id, opt=> opt.Ignore());
+            .ForMember(dest=> dest.Id, opt=> opt.Ignore())
+            .ForMember(dest=> dest.Name, opt=> opt.Condition(src=> src.Name is not null))
+            .ForMember(dest=> dest.Surname, opt=> opt.Condition(src=> src.Surname is not null));
         
         
     }

@@ -26,7 +26,11 @@ public class UpdateActorCommand
         if(actorInDb is null)
             throw new InvalidOperationException("ActorId: "+ActorId+" does not exist.");
         
-        bool isSameNameExists = context.Actors.Where(m=>m.Name.ToLower() == Model.Name.ToLower() && m.Surname.ToLower() == Model.Surname.ToLower() && m.Id != ActorId).Any();
+        bool isSameNameExists = context.Actors.Where(m=>
+                                                m.Name.ToLower() == (Model.Name == null ? actorInDb.Name.ToLower() : Model.Name.ToLower()) && 
+                                                    m.Surname.ToLower() == (Model.Surname == null ? actorInDb.Surname.ToLower() : Model.Surname.ToLower()) && 
+                                                m.Id != ActorId)
+                                              .Any();
         
         if(isSameNameExists)
             throw new InvalidOperationException("ActorNameSurname: "+ Model.Name+" "+Model.Surname+" already exists, choose another name.");

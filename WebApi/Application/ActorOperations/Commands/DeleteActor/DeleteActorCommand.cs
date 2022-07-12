@@ -8,14 +8,12 @@ namespace WebApi.Application.ActorOperations.Commands.DeleteActor;
 public class DeleteActorCommand 
 {
     private readonly IMovieStoreDbContext context;
-    private readonly IMapper mapper;
     public int ActorId { get; set; }
     
 
-    public DeleteActorCommand(IMovieStoreDbContext context, IMapper mapper)
+    public DeleteActorCommand(IMovieStoreDbContext context)
     {
         this.context = context;
-        this.mapper = mapper;
     }
 
     public void Handle()

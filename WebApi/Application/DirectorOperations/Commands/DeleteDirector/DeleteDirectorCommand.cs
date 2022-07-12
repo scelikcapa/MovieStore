@@ -8,14 +8,12 @@ namespace WebApi.Application.DirectorOperations.Commands.DeleteDirector;
 public class DeleteDirectorCommand 
 {
     private readonly IMovieStoreDbContext context;
-    private readonly IMapper mapper;
     public int DirectorId { get; set; }
     
 
-    public DeleteDirectorCommand(IMovieStoreDbContext context, IMapper mapper)
+    public DeleteDirectorCommand(IMovieStoreDbContext context)
     {
         this.context = context;
-        this.mapper = mapper;
     }
 
     public void Handle()
