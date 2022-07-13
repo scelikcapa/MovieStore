@@ -22,10 +22,10 @@ public class GetCustomerGenresQuery
         var customer = context.Customers.Include(c=> c.Genres).SingleOrDefault(m => m.Id == CustomerId && m.IsActive == true);
 
         if(customer is null)
-            throw new InvalidOperationException("CustomerId: "+CustomerId+" does not exist");
+            throw new InvalidOperationException("CustomerId: " + CustomerId + " does not exist.");
         
         if(!customer.Genres.Any())
-            throw new HttpRequestException("CustomerId: "+CustomerId+" does not have any genre.");
+            throw new InvalidOperationException("CustomerId: " + CustomerId + " does not have any genre.");
 
         var customerGenres = mapper.Map<List<GetCustomerGenresViewModel>>(customer.Genres);
 
