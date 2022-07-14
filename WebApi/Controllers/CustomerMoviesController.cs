@@ -1,5 +1,6 @@
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.CustomerMoviesOperations.Commands.CreateCustomerMovies;
 using WebApi.Application.CustomerMoviesOperations.Queries.GetCustomerMoviesById;
@@ -7,6 +8,7 @@ using WebApi.DbOperations;
 
 namespace WebApi.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("Customers")]
 public class CustomerMoviesController : ControllerBase

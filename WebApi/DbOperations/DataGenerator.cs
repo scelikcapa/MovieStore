@@ -60,11 +60,15 @@ public class DataGenerator
                 new Customer{
                     Name = "Samet",
                     Surname = "Celikcapa",
+                    Email = "samet@mail.com",
+                    Password = "password",
                     Genres = context.Genres.Where(g=>g.Id == 1 || g.Id == 2).ToList()
                 },
                 new Customer{
                     Name = "Zeynep",
                     Surname = "Çelikçapa",
+                    Email = "zeynep@mail.com",
+                    Password = "password",
                     Genres = context.Genres.Where(g=>g.Id == 3).ToList()
                 } 
             );
