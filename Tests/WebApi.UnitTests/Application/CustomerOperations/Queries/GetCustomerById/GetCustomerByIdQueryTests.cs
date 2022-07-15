@@ -24,7 +24,9 @@ public class GetCustomerByIdQueryTests : IClassFixture<CommonTestFixture>
         // arrange
         var customer = new Customer{ 
             Name = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn", 
-            Surname = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn"};
+            Surname = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn", 
+            Email = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn", 
+            Password = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn"};
 
         context.Customers.Add(customer);
         context.SaveChanges();
@@ -47,7 +49,9 @@ public class GetCustomerByIdQueryTests : IClassFixture<CommonTestFixture>
         // Arrange
         var customer = new Customer{ 
             Name = "WhenGivenCustomerIdDoesExistInDb_Customer_ShouldBeReturned", 
-            Surname = "WhenGivenCustomerIdDoesExistInDb_Customer_ShouldBeReturned"};
+            Surname = "WhenGivenCustomerIdDoesExistInDb_Customer_ShouldBeReturned", 
+            Email = "WhenGivenCustomerIdDoesExistInDb_Customer_ShouldBeReturned", 
+            Password = "WhenGivenCustomerIdDoesExistInDb_Customer_ShouldBeReturned"};
         context.Customers.Add(customer);
         context.SaveChanges();
 

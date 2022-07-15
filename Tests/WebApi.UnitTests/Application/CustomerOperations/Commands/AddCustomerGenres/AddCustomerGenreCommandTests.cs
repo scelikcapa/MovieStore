@@ -50,9 +50,14 @@ public class AddCustomerGenreCommandTests : IClassFixture<CommonTestFixture>
     public void WhenGivenGenreAlreadyAddedToCustomer_InvalidOperationException_ShouldBeReturned()
     {
         // Arrange
+        var genreNew = new Genre{Name = "NewGenre"};
+        context.Genres.Add(genreNew);
+        context.Customers.Include(c => c.Genres).Single(c=>c.Id == 1).Genres.Add(genreNew);
+        context.SaveChanges();
+
         var command = new AddCustomerGenreCommand(context, mapper);
         command.CustomerId = 1;
-        command.Model = new AddCustomerGenreModel{GenreId = 1};
+        command.Model = new AddCustomerGenreModel{GenreId = genreNew.Id};
         
         // Act - Assert
         FluentActions

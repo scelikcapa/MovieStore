@@ -37,11 +37,15 @@ public class UpdateCustomerCommandTests : IClassFixture<CommonTestFixture>
         // Arrange
         var customerInDb = new Customer{ 
                         Name = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn1", 
-                        Surname = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn1"};
+                        Surname = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn1", 
+                        Email = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn1", 
+                        Password = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn1"};
 
         var customerUpdating = new Customer{ 
                         Name = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn2", 
-                        Surname = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn2"};
+                        Surname = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn2", 
+                        Email = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn2", 
+                        Password = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn2"};
 
         context.Customers.Add(customerInDb);
         context.Customers.Add(customerUpdating);
@@ -65,7 +69,9 @@ public class UpdateCustomerCommandTests : IClassFixture<CommonTestFixture>
         // Arrange
         var customerInDb = new Customer{ 
                         Name = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeUpdated", 
-                        Surname = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeUpdated"};
+                        Surname = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeUpdated", 
+                        Email = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeUpdated", 
+                        Password = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeUpdated"};
 
         var customerCompared = new Customer{ 
                             Name = customerInDb.Name,

@@ -34,7 +34,9 @@ public class DeleteCustomerCommandTests : IClassFixture<CommonTestFixture>
         // Arrange
         var customerInDb = new Customer{
                         Name = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeDeleted", 
-                        Surname = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeDeleted"};
+                        Surname = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeDeleted",
+                        Email = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeDeleted",
+                        Password = "WhenGivenCustomerIdExistsInDb_Customer_ShouldBeDeleted"};
                         
         context.Customers.Add(customerInDb);
         context.SaveChanges();

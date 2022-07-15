@@ -24,7 +24,7 @@ public class CustomersController : ControllerBase
         this.context = context;
     }
 
-     [HttpGet]
+    [HttpGet]
     public IActionResult GetCustomers()
     {
         var query = new GetCustomersQuery(context,mapper);

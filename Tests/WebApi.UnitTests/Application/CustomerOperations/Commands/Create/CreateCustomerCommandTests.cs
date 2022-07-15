@@ -17,14 +17,16 @@ public class CreateCustomerCommandTests : IClassFixture<CommonTestFixture>
         mapper = testFixture.Mapper;
         context = testFixture.Context;
     }
-
+    
     [Fact]
-    public void WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn()
+    public void WhenGivenCustomerEmailAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn()
     {
         // Arrange
         var customerInDb = new Customer{ 
-                        Name = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn", 
-                        Surname = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn" };
+                        Name = "WhenGivenCustomerEmailAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn", 
+                        Surname = "WhenGivenCustomerEmailAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn",
+                        Email = "WhenGivenCustomerEmailAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn",
+                        Password = "WhenGivenCustomerEmailAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn" };
 
         context.Customers.Add(customerInDb);
         context.SaveChanges();
@@ -32,7 +34,35 @@ public class CreateCustomerCommandTests : IClassFixture<CommonTestFixture>
         var command = new CreateCustomerCommand(context,mapper);
         command.Model = new CreateCustomerModel{
                             Name = customerInDb.Name,
-                            Surname = customerInDb.Surname};
+                            Surname = customerInDb.Surname,
+                            Email = customerInDb.Email,
+                            Password = customerInDb.Password};
+
+        // Act - Assert
+        FluentActions
+                .Invoking(() => command.Handle())
+                .Should().Throw<InvalidOperationException>().And.Message.Should().Be("CustomerEmail: " + command.Model.Email + " already exists.");
+    }
+
+    [Fact]
+    public void WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn()
+    {
+        // Arrange
+        var customerInDb = new Customer{ 
+                        Name = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn", 
+                        Surname = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn", 
+                        Email = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn", 
+                        Password = "WhenGivenCustomerNameAlreadyExistsInDb_InvalidOperationException_ShouldBeReturn" };
+
+        context.Customers.Add(customerInDb);
+        context.SaveChanges();
+
+        var command = new CreateCustomerCommand(context,mapper);
+        command.Model = new CreateCustomerModel{
+                                Name = customerInDb.Name,
+                                Surname = customerInDb.Surname,
+                                Email = "differentEmail",
+                                Password = customerInDb.Password};
 
         // Act - Assert
         FluentActions
@@ -47,7 +77,9 @@ public class CreateCustomerCommandTests : IClassFixture<CommonTestFixture>
         var command = new CreateCustomerCommand(context,mapper);
         command.Model = new CreateCustomerModel{
                             Name = "WhenValidInputsAreGiven_Customer_ShouldBeCreated", 
-                            Surname = "WhenValidInputsAreGiven_Customer_ShouldBeCreated"};
+                            Surname = "WhenValidInputsAreGiven_Customer_ShouldBeCreated",
+                            Email = "WhenValidInputsAreGiven_Customer_ShouldBeCreated",
+                            Password = "WhenValidInputsAreGiven_Customer_ShouldBeCreated"};
 
         // Act
         FluentActions.Invoking(() => command.Handle()).Invoke();

@@ -37,7 +37,9 @@ public class GetCustomerMoviesByIdQueryTests : IClassFixture<CommonTestFixture>
         // arrange
         var customer = new Customer{ 
             Name = "WhenGivenCustomerMoviesIdDoesExistInDb_CustomerMovies_ShouldBeReturned", 
-            Surname = "WhenGivenCustomerMoviesIdDoesExistInDb_CustomerMovies_ShouldBeReturned"};
+            Surname = "WhenGivenCustomerMoviesIdDoesExistInDb_CustomerMovies_ShouldBeReturned",
+            Email = "WhenGivenCustomerDoesNotHaveMovies_InvalidOperationException_ShouldBeReturned",
+            Password = "WhenGivenCustomerDoesNotHaveMovies_InvalidOperationException_ShouldBeReturned"};
         context.Customers.Add(customer);
         context.SaveChanges();
 
@@ -62,8 +64,10 @@ public class GetCustomerMoviesByIdQueryTests : IClassFixture<CommonTestFixture>
                         DirectorId = 1};
         
         var customerInDb = new Customer{ 
-            Name = "WhenGivenCustomerMoviesIdDoesExistInDb_CustomerMovies_ShouldBeReturned", 
-            Surname = "WhenGivenCustomerMoviesIdDoesExistInDb_CustomerMovies_ShouldBeReturned"};
+            Name = "WhenGivenCustomerHasMovie_CustomerMovies_ShouldBeReturned", 
+            Surname = "WhenGivenCustomerHasMovie_CustomerMovies_ShouldBeReturned",
+            Email = "WhenGivenCustomerHasMovie_CustomerMovies_ShouldBeReturned",
+            Password = "WhenGivenCustomerHasMovie_CustomerMovies_ShouldBeReturned"};
 
         context.Movies.Add(movieInDb);
         context.Customers.Add(customerInDb);

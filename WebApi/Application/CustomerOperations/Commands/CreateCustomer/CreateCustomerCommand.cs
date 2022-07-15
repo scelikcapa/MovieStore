@@ -19,7 +19,12 @@ public class CreateCustomerCommand
 
     public void Handle()
     {
-        var customerInDb = context.Customers.SingleOrDefault(m=>m.Name.ToLower() == Model.Name.ToLower() && m.Surname.ToLower() == Model.Surname.ToLower());
+        var customerInDb = context.Customers.SingleOrDefault(m=>m.Email.ToLower() == Model.Email.ToLower());
+        
+        if(customerInDb is not null)
+            throw new InvalidOperationException("CustomerEmail: " + Model.Email +" already exists.");
+        
+        customerInDb = context.Customers.SingleOrDefault(m=>m.Name.ToLower() == Model.Name.ToLower() && m.Surname.ToLower() == Model.Surname.ToLower());
 
         if(customerInDb is not null)
             throw new InvalidOperationException("CustomerNameSurname: " + Model.Name +" "+Model.Surname + " already exists.");
@@ -35,4 +40,6 @@ public class CreateCustomerModel
 {
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 }

@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
 
     <!--MY CODE-->
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>

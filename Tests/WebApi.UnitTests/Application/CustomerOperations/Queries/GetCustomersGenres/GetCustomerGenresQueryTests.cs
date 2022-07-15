@@ -24,7 +24,9 @@ public class GetCustomerGenresQueryTests : IClassFixture<CommonTestFixture>
         // Arrange
         var customer = new Customer{ 
             Name = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn", 
-            Surname = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn"};
+            Surname = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn", 
+            Email = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn", 
+            Password = "WhenGivenCustomerIdDoesNotExistInDb_InvalidOperationException_ShouldBeReturn"};
 
         context.Customers.Add(customer);
         context.SaveChanges();
@@ -48,6 +50,8 @@ public class GetCustomerGenresQueryTests : IClassFixture<CommonTestFixture>
         var customer = new Customer{ 
             Name = "WhenGivenCustomerDoesNotHaveGenres_InvalidOperationException_ShouldBeReturn", 
             Surname = "WhenGivenCustomerDoesNotHaveGenres_InvalidOperationException_ShouldBeReturn",
+            Email = "WhenGivenCustomerDoesNotHaveGenres_InvalidOperationException_ShouldBeReturn",
+            Password = "WhenGivenCustomerDoesNotHaveGenres_InvalidOperationException_ShouldBeReturn",
             Genres = null};
 
         context.Customers.Add(customer);
@@ -72,6 +76,8 @@ public class GetCustomerGenresQueryTests : IClassFixture<CommonTestFixture>
         var customer = new Customer{ 
             Name = "WhenGivenCustomerHaveGenres_Genres_ShouldBeReturn", 
             Surname = "WhenGivenCustomerHaveGenres_Genres_ShouldBeReturn",
+            Email = "WhenGivenCustomerHaveGenres_Genres_ShouldBeReturn",
+            Password = "WhenGivenCustomerHaveGenres_Genres_ShouldBeReturn",
             Genres = genreList};
 
         context.Customers.Add(customer);

@@ -42,6 +42,6 @@ public class UpdateCustomerCommand
 
 public class UpdateCustomerModel 
 {
-    public string Name { get; set; }
-    public string Surname { get; set; }    
+    public string? Name { get; set; }
+    public string? Surname { get; set; }
 }

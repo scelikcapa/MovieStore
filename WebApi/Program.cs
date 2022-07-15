@@ -29,24 +29,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 
 // Add services to the container.
+
 // MY CODE - for returning "Http status code 406 Not Acceptable" if Accept Header is not application/json
-// MY CODE - for supporting Accept Header applicaiton/xml request 
 // builder.Services.AddControllers(options => options.ReturnHttpNotAcceptable = true).AddXmlSerializerFormatters();
-builder.Services.AddControllers().AddXmlSerializerFormatters();
+
+// MY CODE - for supporting Accept Header applicaiton/xml request
+// builder.Services.AddControllers().AddXmlSerializerFormatters();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+// MY CODE - updated - for adding non-nullable referencetypes support to Swagger
+builder.Services.AddSwaggerGen(options => {
+                                    options.SupportNonNullableReferenceTypes();});
 
-
-// MY CODE
+// MY CODE - added
 builder.Services.AddDbContext<MovieStoreDbContext>(options =>options.UseInMemoryDatabase("MovieStoreDb"));
 builder.Services.AddScoped<IMovieStoreDbContext>(provider => provider.GetService<MovieStoreDbContext>());
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddSingleton<ILoggerService, ConsoleLogger>();
 
-// MY CODE - for preventing JSON Loop error "A possible object cycle was detected which is not supported." in Eager Loading for Many-To-Many relationships 
+// MY CODE - updated - for preventing JSON Loop error "A possible object cycle was detected which is not supported." in Eager Loading for Many-To-Many relationships 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 

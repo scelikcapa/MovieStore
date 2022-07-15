@@ -7,19 +7,25 @@ public static class Customers
 {
     public static void CreateCustomers(this MovieStoreDbContext context)
     {
+        var genres = context.Genres.ToList();
+
         context.Customers.AddRange(
             new Customer{
                 Name = "Samet",
                 Surname = "Celikcapa",
-                Genres = context.Genres.Where(g=>g.Id == 1 || g.Id == 2).ToList()
+                Email = "samet@mail.com",
+                Password = "password",
+                Genres = genres.Where(g=> g.Id == 1 || g.Id == 2).ToList()
             },
             new Customer{
                 Name = "Zeynep",
-                Surname = "Çelikçapa",
-                Genres = context.Genres.Where(g=>g.Id == 3).ToList()
+                Surname = "Celikçapa",
+                Email = "zeynep@mail.com",
+                Password = "password",
+                Genres = genres.Where(g=> g.Id == 3).ToList()
             } 
         );
-        
+
         context.SaveChanges();
     }
 }
